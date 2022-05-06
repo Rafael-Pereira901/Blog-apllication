@@ -1,5 +1,7 @@
 package com.lad.springbootblogrestapi.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,7 +32,7 @@ public class PostController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<PostDto> createPost(@RequestBody PostDto postDto){
+	public ResponseEntity<PostDto> createPost(@Valid @RequestBody PostDto postDto){
 		return new ResponseEntity<>(postService.createPost(postDto), HttpStatus.CREATED);
 	}
 	 
@@ -50,7 +52,7 @@ public class PostController {
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<PostDto> updatePost(@RequestBody PostDto postDto, @PathVariable(name="id") long id){
+	public ResponseEntity<PostDto> updatePost(@Valid @RequestBody PostDto postDto, @PathVariable(name="id") long id){
 		return new ResponseEntity<PostDto>(postService.updatePost(postDto, id), HttpStatus.OK);
 	}
 	
